@@ -95,22 +95,32 @@ class LinkedList {
     }
     console.log(null);
   }
+  insertAt(value, index) {
+    let curr = this.head;
+    let newNode = new Node(value);
+    if (index === 0) {
+      this.prepend(value);
+    } else if (index === this.size()) {
+      this.append(value);
+    } else {
+      for (let i = 1; i < index - 1 && curr; i++) {
+        curr = curr.next;
+      }
+      newNode.next = curr.next;
+      curr.next = newNode;
+    }
+  }
+  removeAt(index) {
+    let curr = this.head;
+    if (index === 0) {
+      this.head = curr.next;
+    } else if (index === this.size() - 1) {
+      this.pop();
+    } else {
+      for (let i = 1; i < index - 1 && curr.next; i++) {
+        curr = curr.next;
+      }
+      curr.next = curr.next.next;
+    }
+  }
 }
-
-const linkedList = new LinkedList();
-const linkedList2 = new LinkedList();
-linkedList.append(5);
-linkedList.append(2);
-linkedList.append(4);
-linkedList.prepend(1);
-console.log(linkedList);
-console.log(linkedList.size());
-console.log(linkedList.getHead());
-console.log(linkedList.getTail());
-console.log(linkedList.at(2));
-linkedList.pop();
-console.log(linkedList);
-console.log(linkedList.size());
-console.log(linkedList2.contains(6));
-console.log(linkedList.find(5));
-linkedList.toString();
